@@ -1,8 +1,10 @@
+import React from 'react';
+import { RouteComponentProps } from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { HomePage } from './HomePage';
-import { QuestionState } from '../Question/questionTypes';
+import { QuestionPage } from './QuestionPage';
 import { ApplicationState } from '../Common/redux/reducer';
+import { QuestionState } from '../Question/questionTypes';
 import * as actions from '../Question/questionActions';
 
 interface PropsFromState {
@@ -10,20 +12,22 @@ interface PropsFromState {
 }
 
 interface PropsFromDispatch {
-    getQuestions: typeof actions.getQuestions;
+    getQuestion: typeof actions.getQuestion;
 }
 
-export type HomePageProps = PropsFromState & PropsFromDispatch;
+export type QuestionPageProps = PropsFromState &
+    PropsFromDispatch &
+    RouteComponentProps;
 
 const mapStateToProps = ({ question }: ApplicationState): PropsFromState => ({
     question,
 });
 
 const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
-    getQuestions: () => dispatch(actions.getQuestions()),
+    getQuestion: (uuid: string) => dispatch(actions.getQuestion(uuid)),
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(HomePage);
+)(QuestionPage);

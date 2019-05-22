@@ -62,6 +62,7 @@ export interface QuestionState {
     readonly isLoading: boolean;
     readonly isError: boolean;
     readonly statusMessage: string;
+    readonly current: Question | null;
 }
 
 export interface GetQuestionOpts {
@@ -72,4 +73,7 @@ export enum QuestionActionTypes {
     GET_QUESTIONS_REQUEST = 'GET_QUESTIONS_REQUEST',
     GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS',
     GET_QUESTIONS_FAILURE = 'GET_QUESTIONS_FAILURE',
+    GET_QUESTION_REQUEST = 'GET_QUESTION_REQUEST',
+    GET_QUESTION_SUCCESS = 'GET_QUESTION_SUCCESS',
+    GET_QUESTION_FAILURE = 'GET_QUESTION_FAILURE',
 }
