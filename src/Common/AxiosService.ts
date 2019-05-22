@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
+const serviceUrl = process.env.REACT_APP_SERVICE_BASE_URL || '';
+
 export default class AxiosService {
     baseURL: string;
-    constructor(baseURL: string = '/') {
+    constructor(baseURL: string = serviceUrl) {
         this.baseURL = baseURL;
     }
 
