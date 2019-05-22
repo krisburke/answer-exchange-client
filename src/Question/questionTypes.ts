@@ -68,7 +68,7 @@ export interface GetQuestionOpts {
     include: IncludeOpts;
 }
 
-export const enum QuestionActionTypes {
+export enum QuestionActionTypes {
     GET_QUESTIONS_REQUEST = 'GET_QUESTIONS_REQUEST',
     GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS',
     GET_QUESTIONS_FAILURE = 'GET_QUESTIONS_FAILURE',

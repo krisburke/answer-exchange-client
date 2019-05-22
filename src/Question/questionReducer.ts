@@ -7,7 +7,10 @@ const initialState: QuestionState = {
     statusMessage: '',
 };
 
-interface Action { type: actions; payload: any }
+interface Action {
+    type: actions;
+    payload: any;
+}
 
 export const questionReducer = (
     state: QuestionState = initialState,
