@@ -10,6 +10,12 @@ export interface Question {
     tags?: Tag[];
 }
 
+export interface CreateQuestionDto {
+    title: string;
+    text: string;
+    authorUserUuid: string;
+}
+
 export interface User {
     uuid: string;
     username: string;
@@ -76,4 +82,7 @@ export enum QuestionActionTypes {
     GET_QUESTION_REQUEST = 'GET_QUESTION_REQUEST',
     GET_QUESTION_SUCCESS = 'GET_QUESTION_SUCCESS',
     GET_QUESTION_FAILURE = 'GET_QUESTION_FAILURE',
+    CREATE_QUESTION_REQUEST = 'CREATE_QUESTION_REQUEST',
+    CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS',
+    CREATE_QUESTION_FAILURE = 'CREATE_QUESTION_FAILURE',
 }
