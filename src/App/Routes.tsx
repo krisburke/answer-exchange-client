@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router';
 import HomePageContainer from '../HomePage/HomePageContainer';
 import QuestionPageContainer from '../QuestionPage/QuestionPageContainer';
 import AskQuestionPageContainer from '../AskQuestionPage/AskQuestionPageContainer';
+import LoginPageContainer from '../LoginPage/LoginPageContainer';
 
 // TODO private routes
 export const Routes: React.FC = () => {
@@ -25,6 +26,12 @@ export const Routes: React.FC = () => {
                 path="/ask"
                 exact={true}
                 component={AskQuestionPageContainer}
+            />
+            <Route
+                key="login"
+                path="/login"
+                exact={true}
+                component={LoginPageContainer}
             />
         </Switch>
     );

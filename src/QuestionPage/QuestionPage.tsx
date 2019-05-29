@@ -19,6 +19,7 @@ export class QuestionPage extends Component<QuestionPageProps> {
             <div>
                 <h1>Welcome to question page</h1>
                 <h2>{current.title}</h2>
+                <p>{current.text}</p>
             </div>
         );
     }

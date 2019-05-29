@@ -1,5 +1,5 @@
 import React from 'react';
-import Yup from 'yup';
+import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 import { CreateQuestionDto } from '../Question/questionTypes';
@@ -21,9 +21,10 @@ export const AskQuestionForm = ({ createQuestion }: AskQuestionPageProps) => {
     });
 
     const handleFormSubmit = (props: CreateQuestionDto) => {
+        const { title, text, authorUserUuid } = props;
         console.log('creating question');
         console.log(props);
-        // return createQuestion({ title, text, authorUserUuid });
+        return createQuestion({ title, text, authorUserUuid });
     };
 
     return (
@@ -57,11 +58,13 @@ export const AskQuestionForm = ({ createQuestion }: AskQuestionPageProps) => {
                         <TextAreaInputField
                             id="text"
                             label="Body"
+                            fill={true}
+                            rows={15}
                             value={values.text}
                             onChange={setFieldValue}
                             onBlur={setFieldTouched}
-                            error={errors.title}
-                            touched={touched.title}
+                            error={errors.text}
+                            touched={touched.text}
                         />
                         <Button
                             type="submit"
