@@ -5,13 +5,14 @@ import { QuestionList } from './QuestionList';
 
 export class HomePage extends Component<HomePageProps> {
     componentDidMount() {
-        this.props.getQuestions();
+        this.props.getQuestions({ expand: 'answers,author' });
     }
 
     render() {
         const {
             question: { isLoading, items },
         } = this.props;
+        console.log('questions:', items);
 
         if (isLoading || !items) {
             return <Spinner />;

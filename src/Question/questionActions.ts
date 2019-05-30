@@ -4,7 +4,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import service from './QuestionService';
 import {
     CreateQuestionDto,
-    IncludeOpts,
+    GetQuestionOpts,
     Question,
     QuestionActionTypes as actions,
 } from './questionTypes';
@@ -17,10 +17,12 @@ export const getQuestionsSuccess = (questions: Question[]) =>
 export const getQuestionsFailure = (errorMessage: string) =>
     action(actions.GET_QUESTIONS_FAILURE, errorMessage);
 
-export const getQuestions = () => (dispatch: Dispatch) => {
+export const getQuestions = ({ expand }: GetQuestionOpts) => (
+    dispatch: Dispatch,
+) => {
     dispatch(getQuestionsRequest());
     return service
-        .getQuestions({ include: IncludeOpts.Author })
+        .getQuestions({ expand })
         .then(({ data }: AxiosResponse<Question[]>) => {
             dispatch(getQuestionsSuccess(data));
         })
@@ -37,10 +39,12 @@ export const getQuestionSuccess = (question: Question) =>
 export const getQuestionFailure = (errorMessage: string) =>
     action(actions.GET_QUESTION_FAILURE, errorMessage);
 
-export const getQuestion = (uuid: string) => (dispatch: Dispatch) => {
+export const getQuestion = (uuid: string, { expand }: GetQuestionOpts) => (
+    dispatch: Dispatch,
+) => {
     dispatch(getQuestionRequest());
     return service
-        .getQuestion(uuid, { include: IncludeOpts.Author })
+        .getQuestion(uuid, { expand })
         .then(({ data }: AxiosResponse<Question>) => {
             dispatch(getQuestionSuccess(data));
         })

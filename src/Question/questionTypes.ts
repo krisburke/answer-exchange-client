@@ -56,13 +56,6 @@ export interface Comment {
     answer?: Answer;
 }
 
-export enum IncludeOpts {
-    Author = 'author',
-    Questions = 'questions',
-    Comments = 'comments',
-    Answers = 'answers',
-}
-
 export interface QuestionState {
     readonly items: Question[];
     readonly isLoading: boolean;
@@ -72,7 +65,7 @@ export interface QuestionState {
 }
 
 export interface GetQuestionOpts {
-    include: IncludeOpts;
+    expand?: string;
 }
 
 export enum QuestionActionTypes {

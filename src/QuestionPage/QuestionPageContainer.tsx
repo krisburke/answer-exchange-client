@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { QuestionPage } from './QuestionPage';
 import { ApplicationState } from '../Common/redux/reducer';
-import { QuestionState } from '../Question/questionTypes';
+import { GetQuestionOpts, QuestionState } from '../Question/questionTypes';
 import * as actions from '../Question/questionActions';
 
 interface PropsFromState {
@@ -24,7 +24,8 @@ const mapStateToProps = ({ question }: ApplicationState): PropsFromState => ({
 });
 
 const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
-    getQuestion: (uuid: string) => dispatch(actions.getQuestion(uuid)),
+    getQuestion: (uuid: string, opts: GetQuestionOpts) =>
+        dispatch(actions.getQuestion(uuid, opts)),
 });
 
 export default connect(
