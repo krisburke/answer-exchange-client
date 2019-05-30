@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { QuestionPageProps } from './QuestionPageContainer';
 import { Spinner } from '@blueprintjs/core';
+import { AnswerList } from './AnswerList';
+import { CreateAnswerForm } from './CreateAnswerForm';
 
 export class QuestionPage extends Component<QuestionPageProps> {
     componentDidMount(): void {
@@ -23,6 +25,8 @@ export class QuestionPage extends Component<QuestionPageProps> {
                 <h1>Welcome to question page</h1>
                 <h2>{current.title}</h2>
                 <p>{current.text}</p>
+                <AnswerList answers={current.answers} />
+                <CreateAnswerForm {...this.props} />
             </div>
         );
     }

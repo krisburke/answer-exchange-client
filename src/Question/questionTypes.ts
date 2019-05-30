@@ -16,6 +16,12 @@ export interface CreateQuestionDto {
     authorUserUuid: string;
 }
 
+export interface CreateAnswerDto {
+    text: string;
+    authorUserUuid: string;
+    questionUuid: string;
+}
+
 export interface User {
     uuid: string;
     username: string;
@@ -78,4 +84,7 @@ export enum QuestionActionTypes {
     CREATE_QUESTION_REQUEST = 'CREATE_QUESTION_REQUEST',
     CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS',
     CREATE_QUESTION_FAILURE = 'CREATE_QUESTION_FAILURE',
+    CREATE_ANSWER_REQUEST = 'CREATE_ANSWER_REQUEST',
+    CREATE_ANSWER_SUCCESS = 'CREATE_ANSWER_SUCCESS',
+    CREATE_ANSWER_FAILURE = 'CREATE_ANSWER_FAILURE',
 }
