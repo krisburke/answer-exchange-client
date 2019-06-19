@@ -4,13 +4,22 @@ import {
     CreateAnswerDto,
     CreateQuestionDto,
     GetQuestionOpts,
+    GetQuestionsOpts,
     Question,
+    QuestionReponseDto,
 } from './questionTypes';
 import { AxiosPromise } from 'axios';
 
 class QuestionService extends AxiosService {
-    getQuestions({ expand }: GetQuestionOpts): AxiosPromise<Question[]> {
-        return this.get(`/questions?expand=${expand}`, {});
+    getQuestions({
+        expand,
+        skip,
+        take,
+    }: GetQuestionsOpts): AxiosPromise<QuestionReponseDto> {
+        return this.get(
+            `/questions?expand=${expand}&skip=${skip}&take=${take}`,
+            {},
+        );
     }
 
     getQuestion(

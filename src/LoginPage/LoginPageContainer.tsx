@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { LoginPage } from './LoginPage';
 import { ApplicationState } from '../Common/redux/reducer';
-import { AuthState } from '../Auth/authTypes';
+import { AuthState, LoginDto } from '../Auth/authTypes';
 import * as actions from '../Auth/authActions';
 
 interface PropsFromState {
@@ -20,8 +20,7 @@ const mapStateToProps = ({ auth }: ApplicationState): PropsFromState => ({
 });
 
 const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
-    login: (email: string, password: string) =>
-        dispatch(actions.login({ email, password })),
+    login: (loginDto: LoginDto) => dispatch(actions.login(loginDto)),
 });
 
 export default connect(

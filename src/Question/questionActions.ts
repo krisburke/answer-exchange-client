@@ -7,25 +7,27 @@ import {
     CreateAnswerDto,
     CreateQuestionDto,
     GetQuestionOpts,
+    GetQuestionsOpts,
     Question,
     QuestionActionTypes as actions,
+    QuestionReponseDto,
 } from './questionTypes';
 
 export const getQuestionsRequest = () => action(actions.GET_QUESTIONS_REQUEST);
 
-export const getQuestionsSuccess = (questions: Question[]) =>
-    action(actions.GET_QUESTIONS_SUCCESS, questions);
+export const getQuestionsSuccess = (questionResponseDto: QuestionReponseDto) =>
+    action(actions.GET_QUESTIONS_SUCCESS, questionResponseDto);
 
 export const getQuestionsFailure = (errorMessage: string) =>
     action(actions.GET_QUESTIONS_FAILURE, errorMessage);
 
-export const getQuestions = ({ expand }: GetQuestionOpts) => (
+export const getQuestions = ({ expand, skip, take }: GetQuestionsOpts) => (
     dispatch: Dispatch,
 ) => {
     dispatch(getQuestionsRequest());
     return service
-        .getQuestions({ expand })
-        .then(({ data }: AxiosResponse<Question[]>) => {
+        .getQuestions({ expand, skip, take })
+        .then(({ data }: AxiosResponse<QuestionReponseDto>) => {
             dispatch(getQuestionsSuccess(data));
         })
         .catch((error: AxiosError) =>

@@ -20,8 +20,10 @@ export const login = (loginDto: LoginDto) => (dispatch: Dispatch) => {
             if (!data || !data.accessToken) {
                 return dispatch(loginFailed('Error: could not log you in.'));
             }
-
             dispatch(loginSuccess(data));
+            // FIXME: use of localstorage is temporary in dev
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('userUuid', data.userUuid);
         })
         .catch((error: AxiosError) =>
             dispatch(loginFailed('Incorrect email or password.')),

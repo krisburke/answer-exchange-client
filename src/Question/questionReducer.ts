@@ -29,7 +29,7 @@ export const questionReducer = (
             return {
                 ...state,
                 isLoading: false,
-                items: action.payload,
+                items: action.payload.results,
                 isError: false,
                 statusMessage: '',
             };
