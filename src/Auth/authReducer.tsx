@@ -4,6 +4,7 @@ const initialState: AuthState = {
     isAuthenticated: false,
     isLoading: false,
     accessToken: null,
+    userUuid: '',
     isError: false,
     statusMessage: '',
 };
@@ -29,7 +30,9 @@ export const authReducer = (
             return {
                 ...state,
                 isLoading: false,
+                isAuthenticated: true,
                 accessToken: action.payload.accessToken,
+                userUuid: action.payload.userUuid,
                 isError: false,
                 statusMessage: '',
             };
@@ -37,6 +40,9 @@ export const authReducer = (
             return {
                 ...state,
                 isLoading: false,
+                isAuthenticated: false,
+                accessToken: '',
+                userUuid: '',
                 isError: true,
                 statusMessage: action.payload,
             };
@@ -44,8 +50,10 @@ export const authReducer = (
             return {
                 ...state,
                 isLoading: false,
-                isError: false,
+                isAuthenticated: false,
+                userUuid: '',
                 statusMessage: '',
+                isError: false,
                 accessToken: '',
             };
         default:
