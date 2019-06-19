@@ -8,10 +8,14 @@ import TextInputField from '../Common/form/TextInputField';
 import TextAreaInputField from '../Common/form/TextAreaInputField';
 
 export const AskQuestionForm = ({ createQuestion }: AskQuestionPageProps) => {
+    const getAuthorUuid = () => {
+        return localStorage.getItem('userUuid');
+    };
+
     const initialValues: CreateQuestionDto = {
         title: '',
         text: '',
-        authorUserUuid: '', // FIXME
+        authorUserUuid: getAuthorUuid() || '',
     };
 
     const validationSchema = Yup.object().shape({

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { HomePage } from './HomePage';
-import { GetQuestionOpts, QuestionState } from '../Question/questionTypes';
+import { GetQuestionsOpts, QuestionState } from '../Question/questionTypes';
 import { ApplicationState } from '../Common/redux/reducer';
 import * as actions from '../Question/questionActions';
 
@@ -20,7 +20,7 @@ const mapStateToProps = ({ question }: ApplicationState): PropsFromState => ({
 });
 
 const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
-    getQuestions: (opts: GetQuestionOpts) =>
+    getQuestions: (opts: GetQuestionsOpts) =>
         dispatch(actions.getQuestions(opts)),
 });
 

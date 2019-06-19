@@ -10,6 +10,12 @@ export interface Question {
     tags?: Tag[];
 }
 
+export interface QuestionReponseDto {
+    results: Question[];
+    pageTotal: number;
+    total: number;
+}
+
 export interface CreateQuestionDto {
     title: string;
     text: string;
@@ -68,6 +74,12 @@ export interface QuestionState {
     readonly isError: boolean;
     readonly statusMessage: string;
     readonly current: Question | null;
+}
+
+export interface GetQuestionsOpts {
+    expand?: string;
+    take: number;
+    skip: number;
 }
 
 export interface GetQuestionOpts {

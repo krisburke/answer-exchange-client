@@ -8,7 +8,7 @@ export class QuestionPage extends Component<QuestionPageProps> {
     componentDidMount(): void {
         const { uuid } = this.props.match.params as any; // fixme
         this.props.getQuestion(uuid, {
-            expand: 'answers,answers.comments,comments,author',
+            expand: 'answers,answers.comments,comments,author,tags',
         });
     }
 
