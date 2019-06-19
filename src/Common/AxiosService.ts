@@ -9,7 +9,9 @@ export default class AxiosService {
     request(url: string, options: AxiosRequestConfig) {
         const fetchOptions: AxiosRequestConfig = {
             ...options,
-            headers: {},
+            headers: {
+                ...this.getAuthHeaders(),
+            },
         };
 
         return axios(`${this.baseURL}${url}`, fetchOptions);
@@ -49,5 +51,11 @@ export default class AxiosService {
         };
 
         return this.request(url, deleteOptions);
+    }
+
+    private getAuthHeaders() {
+        const accessToken = localStorage.getItem('accessToken') || '';
+        const authString = `Bearer ${accessToken}`;
+        return accessToken ? { Authorization: authString } : {};
     }
 }

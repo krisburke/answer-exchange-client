@@ -1,12 +1,11 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-
+import { Button } from '@blueprintjs/core';
 import { CreateQuestionDto } from '../Question/questionTypes';
 import { AskQuestionPageProps } from './AskQuestionPageContainer';
 import TextInputField from '../Common/form/TextInputField';
 import TextAreaInputField from '../Common/form/TextAreaInputField';
-import { Button } from '@blueprintjs/core';
 
 export const AskQuestionForm = ({ createQuestion }: AskQuestionPageProps) => {
     const initialValues: CreateQuestionDto = {
