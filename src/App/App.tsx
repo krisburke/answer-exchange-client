@@ -5,7 +5,6 @@ import { History } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import { ApplicationState } from '../Common/redux/reducer';
 import { Routes } from './Routes';
-import './App.css';
 
 interface Props {
     store: Store<ApplicationState>;
