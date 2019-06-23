@@ -4,7 +4,9 @@ export interface Question {
     text: string;
     createdAt: Date;
     updatedAt: Date;
+    voteCount: number;
     author?: User;
+    votes?: Vote[];
     comments?: Comment[];
     answers?: Answer[];
     tags?: Tag[];
@@ -39,6 +41,7 @@ export interface User {
     questions?: Question[];
     answers?: Answer[];
     comments?: Comment[];
+    votes?: Vote[];
 }
 
 export interface Answer {
@@ -46,9 +49,11 @@ export interface Answer {
     text: string;
     createdAt: Date;
     updatedAt: Date;
+    voteCount: number;
     author?: User;
     comments?: Comment[];
     question?: Question;
+    votes?: Vote[];
 }
 
 export interface Tag {
@@ -66,6 +71,22 @@ export interface Comment {
     author?: User;
     question?: Question;
     answer?: Answer;
+}
+
+export interface Vote {
+    uuid: string;
+    rating: VoteRating;
+    createdAt: Date;
+    updatedAt: Date;
+    voter: User;
+    question: Question;
+    answer: Answer;
+}
+
+export enum VoteRating {
+    Upvote = 1,
+    None = 0,
+    Downvote = -1,
 }
 
 export interface QuestionState {
