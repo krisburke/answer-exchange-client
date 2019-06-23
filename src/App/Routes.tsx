@@ -4,6 +4,7 @@ import HomePageContainer from '../HomePage/HomePageContainer';
 import QuestionPageContainer from '../QuestionPage/QuestionPageContainer';
 import AskQuestionPageContainer from '../AskQuestionPage/AskQuestionPageContainer';
 import LoginPageContainer from '../LoginPage/LoginPageContainer';
+import SignupPageContainer from '../SignupPage/SignupPageContainer';
 
 // TODO private routes
 export const Routes: React.FC = () => {
@@ -32,6 +33,12 @@ export const Routes: React.FC = () => {
                 path="/login"
                 exact={true}
                 component={LoginPageContainer}
+            />
+            <Route
+                key="signup"
+                path="/signup"
+                exact={true}
+                component={SignupPageContainer}
             />
         </Switch>
     );

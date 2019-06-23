@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './Common/global.css';
 import * as serviceWorker from './serviceWorker';
 import { createBrowserHistory } from 'history';
 
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import './Common/global.css';
 
 import { App } from './App/App';
 import configureStore from './Common/redux/store';

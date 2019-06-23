@@ -1,8 +1,9 @@
-import { AuthState, AuthActionTypes as actions } from './authTypes';
+import { AuthActionTypes as actions, AuthState } from './authTypes';
 
 const initialState: AuthState = {
     isAuthenticated: false,
     isLoading: false,
+    isSignedUp: false,
     accessToken: null,
     userUuid: '',
     isError: false,
@@ -19,14 +20,15 @@ export const authReducer = (
     action: Action,
 ): AuthState => {
     switch (action.type) {
-        case 'LOGIN_REQUEST':
+        case actions.LOGIN_REQUEST:
             return {
                 ...state,
                 isLoading: true,
                 isError: false,
                 statusMessage: '',
+                userUuid: '',
             };
-        case 'LOGIN_SUCCESS':
+        case actions.LOGIN_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -36,7 +38,7 @@ export const authReducer = (
                 isError: false,
                 statusMessage: '',
             };
-        case 'LOGIN_FAILED':
+        case actions.LOGIN_FAILED:
             return {
                 ...state,
                 isLoading: false,
@@ -46,7 +48,7 @@ export const authReducer = (
                 isError: true,
                 statusMessage: action.payload,
             };
-        case 'LOGOUT':
+        case actions.LOGOUT:
             return {
                 ...state,
                 isLoading: false,
@@ -55,6 +57,30 @@ export const authReducer = (
                 statusMessage: '',
                 isError: false,
                 accessToken: '',
+            };
+        case actions.SIGNUP_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                isError: false,
+                isSignedUp: false,
+                statusMessage: '',
+            };
+        case actions.SIGNUP_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                isSignedUp: true,
+                statusMessage: '',
+            };
+        case actions.SIGNUP_FAILED:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                isSignedUp: false,
+                statusMessage: action.payload,
             };
         default:
             return state;
