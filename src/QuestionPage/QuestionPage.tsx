@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { QuestionPageProps } from './QuestionPageContainer';
-import { Spinner } from '@blueprintjs/core';
+import { Divider, Icon, Spinner } from '@blueprintjs/core';
 import { AnswerList } from './AnswerList';
 import { CreateAnswerForm } from './CreateAnswerForm';
+import styles from './QuestionPage.module.css';
+import { TagList } from '../Common/components/TagList/TagList';
 
 export class QuestionPage extends Component<QuestionPageProps> {
     componentDidMount(): void {
@@ -21,11 +23,28 @@ export class QuestionPage extends Component<QuestionPageProps> {
         }
 
         return (
-            <div>
-                <h1>Welcome to question page</h1>
-                <h2>{current.title}</h2>
-                <p>{current.text}</p>
+            <div className={styles.page}>
+                <div className={styles.questionHeader}>
+                    <h1>{current.title}</h1>
+                    <Divider />
+                </div>
+                <div className={styles.postLayout}>
+                    <div className={styles.voteCell}>
+                        <Icon icon={'caret-up'} iconSize={30} />
+                        <div className={styles.voteCount}>
+                            {current.voteCount}
+                        </div>
+                        <Icon icon={'caret-down'} iconSize={30} />
+                    </div>
+                    <div className={styles.postCell}>
+                        <div className={styles.postText}>
+                            <p>{current.text}</p>
+                        </div>
+                        <TagList tags={current.tags} />
+                    </div>
+                </div>
                 <AnswerList answers={current.answers} />
+                <Divider />
                 <CreateAnswerForm {...this.props} />
             </div>
         );

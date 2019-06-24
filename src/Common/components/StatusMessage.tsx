@@ -1,6 +1,6 @@
 import React from 'react';
 import { Callout } from '@blueprintjs/core';
-import styles from '../SignupPage/SignupPage.module.css';
+import styles from '../../SignupPage/SignupPage.module.css';
 
 interface StatusMessageProps {
     isError: boolean;

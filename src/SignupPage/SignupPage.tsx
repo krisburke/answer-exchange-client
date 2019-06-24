@@ -3,7 +3,7 @@ import { Card, Elevation, Spinner } from '@blueprintjs/core';
 import { SignupPageProps } from './SignupPageContainer';
 import styles from './SignupPage.module.css';
 import { SignupForm } from './SignupForm';
-import { StatusMessage } from '../Common/StatusMessage';
+import { StatusMessage } from '../Common/components/StatusMessage';
 import { Redirect } from 'react-router';
 
 export default class SignupPage extends Component<SignupPageProps> {
