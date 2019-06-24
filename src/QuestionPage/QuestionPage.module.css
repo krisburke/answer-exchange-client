@@ -1,0 +1,24 @@
+.page {
+    margin: 30px;
+}
+
+.questionHeader {
+    margin-bottom: 15px;
+}
+
+.postLayout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.postCell {
+    margin: 15px;
+}
+
+.postText {
+}
+
+.voteCell {
+    padding: 10px;
+}

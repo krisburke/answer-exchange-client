@@ -1,3 +1,6 @@
+import { Vote } from '../Vote/voteTypes';
+import { Answer } from '../Answer/answerTypes';
+
 export interface Question {
     uuid: string;
     title: string;
@@ -24,12 +27,6 @@ export interface CreateQuestionDto {
     authorUserUuid: string;
 }
 
-export interface CreateAnswerDto {
-    text: string;
-    authorUserUuid: string;
-    questionUuid: string;
-}
-
 export interface User {
     uuid: string;
     username: string;
@@ -41,18 +38,6 @@ export interface User {
     questions?: Question[];
     answers?: Answer[];
     comments?: Comment[];
-    votes?: Vote[];
-}
-
-export interface Answer {
-    uuid: string;
-    text: string;
-    createdAt: Date;
-    updatedAt: Date;
-    voteCount: number;
-    author?: User;
-    comments?: Comment[];
-    question?: Question;
     votes?: Vote[];
 }
 
@@ -71,22 +56,6 @@ export interface Comment {
     author?: User;
     question?: Question;
     answer?: Answer;
-}
-
-export interface Vote {
-    uuid: string;
-    rating: VoteRating;
-    createdAt: Date;
-    updatedAt: Date;
-    voter: User;
-    question: Question;
-    answer: Answer;
-}
-
-export enum VoteRating {
-    Upvote = 1,
-    None = 0,
-    Downvote = -1,
 }
 
 export interface QuestionState {
@@ -117,7 +86,4 @@ export enum QuestionActionTypes {
     CREATE_QUESTION_REQUEST = 'CREATE_QUESTION_REQUEST',
     CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS',
     CREATE_QUESTION_FAILURE = 'CREATE_QUESTION_FAILURE',
-    CREATE_ANSWER_REQUEST = 'CREATE_ANSWER_REQUEST',
-    CREATE_ANSWER_SUCCESS = 'CREATE_ANSWER_SUCCESS',
-    CREATE_ANSWER_FAILURE = 'CREATE_ANSWER_FAILURE',
 }

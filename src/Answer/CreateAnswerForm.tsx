@@ -2,21 +2,21 @@ import React, { FormEvent, useState } from 'react';
 import RichTextEditor from 'react-quill';
 import { Button } from '@blueprintjs/core';
 import 'react-quill/dist/quill.snow.css';
-import { QuestionPageProps } from './QuestionPageContainer';
+import { QuestionPageProps } from '../QuestionPage/QuestionPageContainer';
 import get from 'lodash/get';
 
 export const CreateAnswerForm: React.FC<QuestionPageProps> = ({
     createAnswer,
     question,
+    userUuid,
 }) => {
-    const authorUserUuid = ''; // FIXME
     const questionUuid = get(question, 'current.uuid');
     const [text, setText] = useState('');
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         console.log('creating answer: ', text);
-        createAnswer({ text, authorUserUuid, questionUuid });
+        createAnswer({ text, authorUserUuid: userUuid, questionUuid });
     };
 
     const handleChange = (value: string) => setText(value);

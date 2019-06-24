@@ -3,7 +3,7 @@ import { Card, Elevation, Spinner } from '@blueprintjs/core';
 import { LoginPageProps } from './LoginPageContainer';
 import { LoginForm } from './LoginForm/LoginForm';
 import styles from './LoginPage.module.css';
-import { StatusMessage } from '../Common/StatusMessage';
+import { StatusMessage } from '../Common/components/StatusMessage';
 import { Redirect } from 'react-router';
 
 export const LoginPage = ({ auth, login }: LoginPageProps) => {

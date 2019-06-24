@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { QuestionPageProps } from './QuestionPageContainer';
-import { Spinner } from '@blueprintjs/core';
-import { AnswerList } from './AnswerList';
-import { CreateAnswerForm } from './CreateAnswerForm';
+import { Divider, Spinner } from '@blueprintjs/core';
+import { AnswerList } from '../Answer/AnswerList';
+import { CreateAnswerForm } from '../Answer/CreateAnswerForm';
+import { TagList } from '../Common/components/TagList/TagList';
+import { VoteControls } from '../Vote/VoteControls';
+import styles from './QuestionPage.module.css';
+import { VoteTarget } from '../Vote/voteTypes';
 
 export class QuestionPage extends Component<QuestionPageProps> {
     componentDidMount(): void {
@@ -21,11 +25,27 @@ export class QuestionPage extends Component<QuestionPageProps> {
         }
 
         return (
-            <div>
-                <h1>Welcome to question page</h1>
-                <h2>{current.title}</h2>
-                <p>{current.text}</p>
+            <div className={styles.page}>
+                <div className={styles.questionHeader}>
+                    <h1>{current.title}</h1>
+                    <Divider />
+                </div>
+                <div className={styles.postLayout}>
+                    <div className={styles.voteCell}>
+                        <VoteControls
+                            voteCount={current.voteCount}
+                            voteTarget={VoteTarget.Question}
+                        />
+                    </div>
+                    <div className={styles.postCell}>
+                        <div className={styles.postText}>
+                            <p>{current.text}</p>
+                        </div>
+                        <TagList tags={current.tags} />
+                    </div>
+                </div>
                 <AnswerList answers={current.answers} />
+                <Divider />
                 <CreateAnswerForm {...this.props} />
             </div>
         );

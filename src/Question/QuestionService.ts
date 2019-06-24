@@ -1,7 +1,5 @@
 import AxiosService from '../Common/AxiosService';
 import {
-    Answer,
-    CreateAnswerDto,
     CreateQuestionDto,
     GetQuestionOpts,
     GetQuestionsOpts,
@@ -9,6 +7,7 @@ import {
     QuestionReponseDto,
 } from './questionTypes';
 import { AxiosPromise } from 'axios';
+import { Answer, CreateAnswerDto } from '../Answer/answerTypes';
 
 class QuestionService extends AxiosService {
     getQuestions({
