@@ -1,5 +1,7 @@
 import React from 'react';
-import { Answer } from '../Question/questionTypes';
+import { Answer } from './answerTypes';
+import { Divider } from '@blueprintjs/core';
+import { AnswerListItem } from './AnswerListItem';
 
 interface Props {
     answers?: Answer[];
@@ -12,9 +14,11 @@ export const AnswerList: React.FC<Props> = ({ answers }) => {
 
     return (
         <div>
+            <h2>{answers.length} Answers</h2>
+            <Divider />
             <ul>
                 {answers.map(answer => (
-                    <li key={answer.uuid}>{answer.text}</li>
+                    <AnswerListItem answer={answer} key={answer.uuid} />
                 ))}
             </ul>
         </div>

@@ -4,8 +4,8 @@ const initialState: AuthState = {
     isAuthenticated: false,
     isLoading: false,
     isSignedUp: false,
-    accessToken: null,
-    userUuid: '',
+    accessToken: localStorage.getItem('accessToken') || null,
+    userUuid: localStorage.getItem('userUuid') || '',
     isError: false,
     statusMessage: '',
 };

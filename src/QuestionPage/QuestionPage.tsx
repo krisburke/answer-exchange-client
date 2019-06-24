@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { QuestionPageProps } from './QuestionPageContainer';
-import { Divider, Icon, Spinner } from '@blueprintjs/core';
-import { AnswerList } from './AnswerList';
-import { CreateAnswerForm } from './CreateAnswerForm';
-import styles from './QuestionPage.module.css';
+import { Divider, Spinner } from '@blueprintjs/core';
+import { AnswerList } from '../Answer/AnswerList';
+import { CreateAnswerForm } from '../Answer/CreateAnswerForm';
 import { TagList } from '../Common/components/TagList/TagList';
+import { VoteControls } from '../Vote/VoteControls';
+import styles from './QuestionPage.module.css';
+import { VoteTarget } from '../Vote/voteTypes';
 
 export class QuestionPage extends Component<QuestionPageProps> {
     componentDidMount(): void {
@@ -30,11 +32,10 @@ export class QuestionPage extends Component<QuestionPageProps> {
                 </div>
                 <div className={styles.postLayout}>
                     <div className={styles.voteCell}>
-                        <Icon icon={'caret-up'} iconSize={30} />
-                        <div className={styles.voteCount}>
-                            {current.voteCount}
-                        </div>
-                        <Icon icon={'caret-down'} iconSize={30} />
+                        <VoteControls
+                            voteCount={current.voteCount}
+                            voteTarget={VoteTarget.Question}
+                        />
                     </div>
                     <div className={styles.postCell}>
                         <div className={styles.postText}>

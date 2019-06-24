@@ -3,8 +3,6 @@ import { Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import service from './QuestionService';
 import {
-    Answer,
-    CreateAnswerDto,
     CreateQuestionDto,
     GetQuestionOpts,
     GetQuestionsOpts,
@@ -77,27 +75,5 @@ export const createQuestion = (createQuestionDto: CreateQuestionDto) => (
         })
         .catch((error: AxiosError) =>
             dispatch(createQuestionFailure(error.message)),
-        );
-};
-
-export const createAnswerRequest = () => action(actions.CREATE_ANSWER_REQUEST);
-
-export const createAnswerSuccess = (answer: Answer) =>
-    action(actions.CREATE_ANSWER_SUCCESS, answer);
-
-export const createAnswerFailure = (errorMessage: string) =>
-    action(actions.CREATE_ANSWER_FAILURE, errorMessage);
-
-export const createAnswer = (createAnswerDto: CreateAnswerDto) => (
-    dispatch: Dispatch,
-) => {
-    dispatch(createAnswerRequest());
-    return service
-        .createAnswer(createAnswerDto)
-        .then(({ data }: AxiosResponse<Answer>) => {
-            dispatch(createAnswerSuccess(data));
-        })
-        .catch((error: AxiosError) =>
-            dispatch(createAnswerFailure(error.message)),
         );
 };
