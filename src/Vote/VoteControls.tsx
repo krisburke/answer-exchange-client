@@ -1,7 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Icon } from '@blueprintjs/core';
 import { VoteTarget } from './voteTypes';
-import styles from './VoteControls.module.css';
+
+const VoteCount = styled.div`
+    text-align: center;
+    font-size: 2em;
+`;
 
 interface VoteControlsProps {
     voteCount: number;
@@ -13,7 +18,7 @@ interface VoteControlsProps {
 export const VoteControls = ({ voteCount, voteTarget }: VoteControlsProps) => (
     <div>
         <Icon icon={'caret-up'} iconSize={30} />
-        <div className={styles.voteCount}>{voteCount}</div>
+        <VoteCount>{voteCount}</VoteCount>
         <Icon icon={'caret-down'} iconSize={30} />
     </div>
 );

@@ -1,10 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import * as Yup from 'yup';
 import { Formik, FormikProps } from 'formik';
 import { Button } from '@blueprintjs/core';
-import TextInputField from '../../Common/form/TextInputField';
-import * as actions from '../../Auth/authActions';
-import styles from './LoginForm.module.css';
+import TextInputField from '../Common/form/TextInputField';
+import * as actions from '../Auth/authActions';
 
 interface Props {
     login: typeof actions.login;
@@ -14,6 +14,10 @@ interface LoginFormValues {
     email: string;
     password: string;
 }
+
+const StyledLoginForm = styled.div`
+    margin: 20px 0;
+`;
 
 export const LoginForm = ({ login }: Props) => {
     const initialValues: LoginFormValues = {
@@ -48,7 +52,7 @@ export const LoginForm = ({ login }: Props) => {
                 } = formProps;
 
                 return (
-                    <div className={styles.loginForm}>
+                    <StyledLoginForm>
                         <form onSubmit={handleSubmit}>
                             <TextInputField
                                 id="email"
@@ -78,7 +82,7 @@ export const LoginForm = ({ login }: Props) => {
                                 disabled={isSubmitting}
                             />
                         </form>
-                    </div>
+                    </StyledLoginForm>
                 );
             }}
         </Formik>

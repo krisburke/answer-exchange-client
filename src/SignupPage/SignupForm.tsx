@@ -1,15 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Button } from '@blueprintjs/core';
 import { Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { SignupPageProps } from './SignupPageContainer';
 import { SignupDto } from '../Auth/authTypes';
-import styles from './SignupForm.module.css';
 import TextInputField from '../Common/form/TextInputField';
-import { Button } from '@blueprintjs/core';
 import {
     confirmPasswordValidationRules,
     passwordValidationRules,
-} from '../Auth/PasswordRules/PasswordRules';
+} from '../Auth/PasswordRules/passwordValidation';
 
 interface SignupFormValues {
     email: string;
@@ -17,6 +17,10 @@ interface SignupFormValues {
     password: string;
     repeatPassword: string;
 }
+
+const StyledSignupForm = styled.div`
+    margin: 20px 0;
+`;
 
 export const SignupForm = ({ signup }: SignupPageProps) => {
     const initialValues: SignupFormValues = {
@@ -60,7 +64,7 @@ export const SignupForm = ({ signup }: SignupPageProps) => {
                 } = formProps;
 
                 return (
-                    <div className={styles.signupForm}>
+                    <StyledSignupForm>
                         <form onSubmit={handleSubmit}>
                             <TextInputField
                                 id="email"
@@ -108,7 +112,7 @@ export const SignupForm = ({ signup }: SignupPageProps) => {
                                 disabled={isSubmitting}
                             />
                         </form>
-                    </div>
+                    </StyledSignupForm>
                 );
             }}
         </Formik>

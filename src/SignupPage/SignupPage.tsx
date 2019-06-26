@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
+import styled from 'styled-components';
 import { Card, Elevation, Spinner } from '@blueprintjs/core';
 import { SignupPageProps } from './SignupPageContainer';
-import styles from './SignupPage.module.css';
 import { SignupForm } from './SignupForm';
 import { StatusMessage } from '../Common/components/StatusMessage';
-import { Redirect } from 'react-router';
+
+const StyledSignupPage = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    background-color: #f6f8fa;
+`;
+
+const LinkText = styled.p`
+    margin: 10px 0;
+`;
 
 export default class SignupPage extends Component<SignupPageProps> {
     render() {
@@ -14,9 +27,9 @@ export default class SignupPage extends Component<SignupPageProps> {
 
         if (isLoading) {
             return (
-                <div className={styles.page}>
+                <StyledSignupPage>
                     <Spinner />
-                </div>
+                </StyledSignupPage>
             );
         }
 
@@ -25,16 +38,16 @@ export default class SignupPage extends Component<SignupPageProps> {
         }
 
         return (
-            <div className={styles.page}>
+            <StyledSignupPage>
                 <Card elevation={Elevation.ONE}>
                     <h1>Sign up for an account.</h1>
                     <SignupForm {...this.props} />
                     <StatusMessage isError={isError} message={statusMessage} />
-                    <p className={styles.linkText}>
+                    <LinkText>
                         Already have an account? <a href={'/login'}>Sign in.</a>
-                    </p>
+                    </LinkText>
                 </Card>
-            </div>
+            </StyledSignupPage>
         );
     }
 }

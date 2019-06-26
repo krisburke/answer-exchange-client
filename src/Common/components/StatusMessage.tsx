@@ -1,6 +1,5 @@
 import React from 'react';
 import { Callout } from '@blueprintjs/core';
-import styles from '../../SignupPage/SignupPage.module.css';
 
 interface StatusMessageProps {
     isError: boolean;
@@ -15,7 +14,7 @@ export const StatusMessage = ({ isError, message }: StatusMessageProps) => {
     }
 
     return (
-        <div className={styles.message}>
+        <div>
             <Callout intent={intent}>
                 <p>{message}</p>
             </Callout>
