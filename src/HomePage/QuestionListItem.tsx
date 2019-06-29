@@ -1,48 +1,54 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card } from '@blueprintjs/core';
-import { distanceInWordsToNow } from 'date-fns';
 import { Question } from '../Question/questionTypes';
-import { TagList } from '../Common/components/TagList';
+import { QuestionListItemDescription } from './QuestionListItemDescription';
+import { CountCell } from '../Common/components/CountCell';
 
 interface Props {
     question: Question;
 }
 
-const Title = styled.h2`
-    margin: 12px 0;
+const StyledCard = styled(Card)`
+    padding: 12px 8px;
+`;
+
+const QuestionSummary = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const Counts = styled.div`
+    flex-basis: 20%;
+    display: flex;
+    justify-content: space-evenly;
+`;
+
+const QuestionDescription = styled.div`
+    flex-grow: 1;
 `;
 
 export const QuestionListItem: React.FC<Props> = ({ question }) => {
-    const {
-        answers,
-        author,
-        createdAt,
-        tags,
-        voteCount,
-        title,
-        uuid,
-    } = question;
+    const { answers, voteCount } = question;
     const answerCount = (answers && answers.length) || 0;
-    const answerStatus = answerCount ? 'answered' : 'unanswered';
-    const asker = author && author.username;
+    // TODO add 'isFilled' to answer CountCell after tracking accepted answers
 
     console.log(question);
     return (
-        <Card>
-            <div>
-                <div>{voteCount} votes</div>
-                <div>{answerCount} answers</div>
-                <div>
-                    <Title>
-                        <a href={`/question/${uuid}`}>{title}</a>
-                    </Title>
-                    <TagList tags={tags} />
-                    <div>
-                        asked {distanceInWordsToNow(createdAt)} ago by {asker}
-                    </div>
-                </div>
-            </div>
-        </Card>
+        <StyledCard>
+            <QuestionSummary>
+                <Counts>
+                    <CountCell countNumber={voteCount} countText="votes" />
+                    <CountCell
+                        countNumber={answerCount}
+                        countText="answers"
+                        isOutlined={answerCount > 0}
+                    />
+                </Counts>
+                <QuestionDescription>
+                    <QuestionListItemDescription question={question} />
+                </QuestionDescription>
+            </QuestionSummary>
+        </StyledCard>
     );
 };
