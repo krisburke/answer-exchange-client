@@ -7,6 +7,7 @@ import { CreateAnswerForm } from '../Answer/CreateAnswerForm';
 import { TagList } from '../Common/components/TagList';
 import { VoteControls } from '../Vote/VoteControls';
 import { VoteTarget } from '../Vote/voteTypes';
+import MainContainer from '../Main/MainContainer';
 
 const Page = styled.div`
     margin: 30px;
@@ -48,29 +49,31 @@ export class QuestionPage extends Component<QuestionPageProps> {
         console.log('current question: ', current);
 
         return (
-            <Page>
-                <QuestionHeader>
-                    <h1>{title}</h1>
+            <MainContainer>
+                <Page>
+                    <QuestionHeader>
+                        <h1>{title}</h1>
+                        <Divider />
+                    </QuestionHeader>
+                    <PostLayout>
+                        <VoteCell>
+                            <VoteControls
+                                voteCount={voteCount}
+                                voteTarget={VoteTarget.Question}
+                            />
+                        </VoteCell>
+                        <PostCell>
+                            <div>
+                                <p>{text}</p>
+                            </div>
+                            <TagList tags={tags} />
+                        </PostCell>
+                    </PostLayout>
+                    <AnswerList answers={answers} />
                     <Divider />
-                </QuestionHeader>
-                <PostLayout>
-                    <VoteCell>
-                        <VoteControls
-                            voteCount={voteCount}
-                            voteTarget={VoteTarget.Question}
-                        />
-                    </VoteCell>
-                    <PostCell>
-                        <div>
-                            <p>{text}</p>
-                        </div>
-                        <TagList tags={tags} />
-                    </PostCell>
-                </PostLayout>
-                <AnswerList answers={answers} />
-                <Divider />
-                <CreateAnswerForm {...this.props} />
-            </Page>
+                    <CreateAnswerForm {...this.props} />
+                </Page>
+            </MainContainer>
         );
     }
 }
