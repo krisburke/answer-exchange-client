@@ -10,8 +10,8 @@ import {
 } from '@blueprintjs/core';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-// import { NavbarUserMenu } from './NavbarUserMenu';
 import * as actions from '../../../Auth/authActions';
+import { NavbarUserMenu } from './NavbarUserMenu';
 
 interface Props {
     logout: typeof actions.logout;
@@ -37,8 +37,7 @@ const HomeHeading = styled(BPNavbar.Heading)`
 
 export const Navbar = ({ logout }: Props) => {
     const userMenuProps: IPopoverProps = {
-        content: <div />,
-        // content: <NavbarUserMenu logout={logout} />,
+        content: <NavbarUserMenu logout={logout} />,
         position: Position.BOTTOM,
     };
 
