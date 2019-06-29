@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormGroup, InputGroup, Intent } from '@blueprintjs/core';
+import { FormFieldError } from './FormFieldError';
 
 // TODO: Replace usage with component from formik-blueprintjs-components lib
 
@@ -51,15 +52,11 @@ class TextInputField extends Component<Props> {
                     disabled={this.props.disabled}
                 />
                 {shouldShowError && (
-                    <div style={styles.error}>{this.props.error}</div>
+                    <FormFieldError>{this.props.error}</FormFieldError>
                 )}
             </FormGroup>
         );
     }
 }
-
-const styles = {
-    error: { color: 'red', marginTop: '.5rem' },
-};
 
 export default TextInputField;

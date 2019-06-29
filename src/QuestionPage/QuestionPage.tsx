@@ -1,12 +1,35 @@
 import React, { Component } from 'react';
-import { QuestionPageProps } from './QuestionPageContainer';
+import styled from 'styled-components';
 import { Divider, Spinner } from '@blueprintjs/core';
+import { QuestionPageProps } from './QuestionPageContainer';
 import { AnswerList } from '../Answer/AnswerList';
 import { CreateAnswerForm } from '../Answer/CreateAnswerForm';
-import { TagList } from '../Common/components/TagList/TagList';
+import { TagList } from '../Common/components/TagList';
 import { VoteControls } from '../Vote/VoteControls';
-import styles from './QuestionPage.module.css';
 import { VoteTarget } from '../Vote/voteTypes';
+import MainContainer from '../Main/MainContainer';
+
+const Page = styled.div`
+    margin: 30px;
+`;
+
+const QuestionHeader = styled.div`
+    margin-bottom: 15px;
+`;
+
+const PostLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+`;
+
+const PostCell = styled.div`
+    margin: 15px;
+`;
+
+const VoteCell = styled.div`
+    padding: 10px;
+`;
 
 export class QuestionPage extends Component<QuestionPageProps> {
     componentDidMount(): void {
@@ -18,36 +41,39 @@ export class QuestionPage extends Component<QuestionPageProps> {
 
     render() {
         const { current, isLoading } = this.props.question;
-        console.log('current question: ', current);
 
         if (isLoading || !current) {
             return <Spinner />;
         }
+        const { title, voteCount, text, tags, answers } = current;
+        console.log('current question: ', current);
 
         return (
-            <div className={styles.page}>
-                <div className={styles.questionHeader}>
-                    <h1>{current.title}</h1>
+            <MainContainer>
+                <Page>
+                    <QuestionHeader>
+                        <h1>{title}</h1>
+                        <Divider />
+                    </QuestionHeader>
+                    <PostLayout>
+                        <VoteCell>
+                            <VoteControls
+                                voteCount={voteCount}
+                                voteTarget={VoteTarget.Question}
+                            />
+                        </VoteCell>
+                        <PostCell>
+                            <div>
+                                <p>{text}</p>
+                            </div>
+                            <TagList tags={tags} />
+                        </PostCell>
+                    </PostLayout>
+                    <AnswerList answers={answers} />
                     <Divider />
-                </div>
-                <div className={styles.postLayout}>
-                    <div className={styles.voteCell}>
-                        <VoteControls
-                            voteCount={current.voteCount}
-                            voteTarget={VoteTarget.Question}
-                        />
-                    </div>
-                    <div className={styles.postCell}>
-                        <div className={styles.postText}>
-                            <p>{current.text}</p>
-                        </div>
-                        <TagList tags={current.tags} />
-                    </div>
-                </div>
-                <AnswerList answers={current.answers} />
-                <Divider />
-                <CreateAnswerForm {...this.props} />
-            </div>
+                    <CreateAnswerForm {...this.props} />
+                </Page>
+            </MainContainer>
         );
     }
 }
