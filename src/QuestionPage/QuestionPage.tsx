@@ -4,31 +4,11 @@ import { Divider, Spinner } from '@blueprintjs/core';
 import { QuestionPageProps } from './QuestionPageContainer';
 import { AnswerList } from '../Answer/AnswerList';
 import { CreateAnswerForm } from '../Answer/CreateAnswerForm';
-import { TagList } from '../Common/components/TagList';
-import { VoteControls } from '../Vote/VoteControls';
-import { VoteTarget } from '../Vote/voteTypes';
 import MainContainer from '../Main/MainContainer';
+import { QuestionSection } from './QuestionSection';
 
 const Page = styled.div`
     margin: 30px;
-`;
-
-const QuestionHeader = styled.div`
-    margin-bottom: 15px;
-`;
-
-const PostLayout = styled.div`
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-`;
-
-const PostCell = styled.div`
-    margin: 15px;
-`;
-
-const VoteCell = styled.div`
-    padding: 10px;
 `;
 
 export class QuestionPage extends Component<QuestionPageProps> {
@@ -45,30 +25,13 @@ export class QuestionPage extends Component<QuestionPageProps> {
         if (isLoading || !current) {
             return <Spinner />;
         }
-        const { title, voteCount, text, tags, answers } = current;
+        const { answers } = current;
         console.log('current question: ', current);
 
         return (
             <MainContainer>
                 <Page>
-                    <QuestionHeader>
-                        <h1>{title}</h1>
-                        <Divider />
-                    </QuestionHeader>
-                    <PostLayout>
-                        <VoteCell>
-                            <VoteControls
-                                voteCount={voteCount}
-                                voteTarget={VoteTarget.Question}
-                            />
-                        </VoteCell>
-                        <PostCell>
-                            <div>
-                                <p>{text}</p>
-                            </div>
-                            <TagList tags={tags} />
-                        </PostCell>
-                    </PostLayout>
+                    <QuestionSection question={current} />
                     <AnswerList answers={answers} />
                     <Divider />
                     <CreateAnswerForm {...this.props} />

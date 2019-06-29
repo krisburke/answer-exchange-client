@@ -7,7 +7,7 @@ interface Props {
 
 // TODO: add vote controls
 
-export const AnswerListItem: React.FC<Props> = ({ answer }: Props) => {
+export const AnswerListItem: React.FC<Props> = ({ answer }) => {
     return (
         <li>
             <div dangerouslySetInnerHTML={{ __html: answer.text }} />

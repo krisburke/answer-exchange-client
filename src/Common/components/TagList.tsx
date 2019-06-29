@@ -6,6 +6,11 @@ interface Props {
     tags?: Tag[];
 }
 
+const StyledTagList = styled.span`
+    display: inline-flex;
+    justify-content: space-around;
+`;
+
 const StyledTag = styled.span`
     background-color: #e1ecf4;
     padding: 3px;
@@ -14,11 +19,11 @@ const StyledTag = styled.span`
 
 export const TagList = ({ tags }: Props) => {
     return (
-        <div>
+        <StyledTagList>
             {tags &&
                 tags.map(tag => (
                     <StyledTag key={tag.uuid}>{tag.slug}</StyledTag>
                 ))}
-        </div>
+        </StyledTagList>
     );
 };
