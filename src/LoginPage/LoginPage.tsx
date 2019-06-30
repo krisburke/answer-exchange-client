@@ -42,7 +42,7 @@ export const LoginPage = ({ auth, login }: LoginPageProps) => {
                 <LoginForm login={login} />
                 <StatusMessage isError={isError} message={statusMessage} />
                 <LinkText>
-                    <a href={'/reset-password'}>Forgot password?</a>
+                    <a href={'/forgot-password'}>Forgot password?</a>
                 </LinkText>
                 <LinkText>
                     Don't have an account? <a href={'/signup'}>Sign up.</a>

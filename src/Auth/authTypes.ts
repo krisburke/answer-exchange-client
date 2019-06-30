@@ -16,6 +16,12 @@ export enum AuthActionTypes {
     SIGNUP_REQUEST = 'SIGNUP_REQUEST',
     SIGNUP_SUCCESS = 'SIGNUP_SUCCESS',
     SIGNUP_FAILED = 'SIGNUP_FAILED',
+    FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST',
+    FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS',
+    FORGOT_PASSWORD_FAILED = 'FORGOT_PASSWORD_FAILED',
+    RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST',
+    RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS',
+    RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED',
 }
 
 export interface LoginDto {
@@ -34,4 +40,14 @@ export interface SignupDto {
     username: string;
     displayName?: string;
     password: string;
+}
+
+export interface ForgotPasswordDto {
+    email: string;
+}
+
+export interface ResetPasswordDto {
+    email: string;
+    password: string;
+    token: string;
 }

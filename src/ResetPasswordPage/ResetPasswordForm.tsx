@@ -1,60 +1,61 @@
 import React from 'react';
+import { Location } from 'history';
 import styled from 'styled-components';
 import { Button } from '@blueprintjs/core';
-import { Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
-import { SignupPageProps } from './SignupPageContainer';
-import { SignupDto } from '../Auth/authTypes';
-import TextInputField from '../Common/form/TextInputField';
+import { Formik, FormikProps } from 'formik';
 import {
     confirmPasswordValidationRules,
     passwordValidationRules,
 } from '../Auth/PasswordRules/passwordValidation';
+import { ResetPasswordDto } from '../Auth/authTypes';
+import * as actions from '../Auth/authActions';
+import TextInputField from '../Common/form/TextInputField';
+import { parseQuery } from '../Common/helpers';
 
-interface SignupFormValues {
-    email: string;
-    username: string;
+interface ComponentProps {
+    location?: Location;
+    resetPassword: typeof actions.resetPassword;
+}
+
+interface ResetPasswordFormValues {
     password: string;
     repeatPassword: string;
 }
 
-const StyledSignupForm = styled.div`
+const StyledResetPasswordForm = styled.div`
     margin: 20px 0;
 `;
 
-export const SignupForm = ({ signup }: SignupPageProps) => {
-    const initialValues: SignupFormValues = {
-        email: '',
-        username: '',
+export const ResetPasswordForm: React.FC<ComponentProps> = ({
+    location,
+    resetPassword,
+}) => {
+    const initialValues: ResetPasswordFormValues = {
         password: '',
         repeatPassword: '',
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string()
-            .required('Email is required.')
-            .email('Must be a valid email address.'),
-        username: Yup.string().required('Username is required.'),
         password: passwordValidationRules,
         repeatPassword: confirmPasswordValidationRules,
     });
 
-    const handleFormSubmit = ({
-        email,
-        password,
-        username,
-    }: SignupFormValues) => {
-        const signupDto: SignupDto = { email, password, username };
-        return signup(signupDto);
+    const handleFormSubmit = ({ password }: ResetPasswordFormValues) => {
+        const queryString = (location && location.search) || '';
+        const queryParams = parseQuery(queryString);
+        const { email, token } = queryParams;
+        const resetPasswordDto: ResetPasswordDto = { password, email, token };
+        return resetPassword(resetPasswordDto);
     };
 
     return (
         <Formik
+            onSubmit={handleFormSubmit}
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleFormSubmit}
         >
-            {(formProps: FormikProps<SignupFormValues>) => {
+            {(formProps: FormikProps<ResetPasswordFormValues>) => {
                 const {
                     handleSubmit,
                     errors,
@@ -66,30 +67,12 @@ export const SignupForm = ({ signup }: SignupPageProps) => {
                 } = formProps;
 
                 return (
-                    <StyledSignupForm>
+                    <StyledResetPasswordForm>
                         <form onSubmit={handleSubmit}>
                             <TextInputField
-                                id="email"
-                                label="Email"
-                                value={values.email}
-                                onChange={setFieldValue}
-                                onBlur={setFieldTouched}
-                                error={errors.email}
-                                touched={touched.email}
-                            />
-                            <TextInputField
-                                id="username"
-                                label="Username"
-                                value={values.username}
-                                onChange={setFieldValue}
-                                onBlur={setFieldTouched}
-                                error={errors.username}
-                                touched={touched.username}
-                            />
-                            <TextInputField
                                 id="password"
-                                type="password"
                                 label="Password"
+                                type="password"
                                 value={values.password}
                                 onChange={setFieldValue}
                                 onBlur={setFieldTouched}
@@ -98,7 +81,7 @@ export const SignupForm = ({ signup }: SignupPageProps) => {
                             />
                             <TextInputField
                                 id="repeatPassword"
-                                label="Repeat Password"
+                                label="Confirm Password"
                                 type="password"
                                 value={values.repeatPassword}
                                 onChange={setFieldValue}
@@ -108,13 +91,13 @@ export const SignupForm = ({ signup }: SignupPageProps) => {
                             />
                             <Button
                                 type="submit"
-                                text="Submit"
+                                text="Reset Password"
                                 intent="primary"
                                 fill={true}
                                 disabled={isSubmitting}
                             />
                         </form>
-                    </StyledSignupForm>
+                    </StyledResetPasswordForm>
                 );
             }}
         </Formik>

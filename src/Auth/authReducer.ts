@@ -82,6 +82,48 @@ export const authReducer = (
                 isSignedUp: false,
                 statusMessage: action.payload,
             };
+        case actions.FORGOT_PASSWORD_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                isError: false,
+                statusMessage: '',
+            };
+        case actions.FORGOT_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                statusMessage: action.payload,
+            };
+        case actions.FORGOT_PASSWORD_FAILED:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                statusMessage: action.payload,
+            };
+        case actions.RESET_PASSWORD_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                isError: false,
+                statusMessage: '',
+            };
+        case actions.RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                statusMessage: action.payload,
+            };
+        case actions.RESET_PASSWORD_FAILED:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                statusMessage: action.payload,
+            };
         default:
             return state;
     }
