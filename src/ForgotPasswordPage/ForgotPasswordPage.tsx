@@ -1,18 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Elevation, Spinner } from '@blueprintjs/core';
+import { Elevation, Spinner } from '@blueprintjs/core';
 import { ForgotPasswordPageProps } from './ForgotPasswordContainer';
 import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { StatusMessage } from '../Common/components/StatusMessage';
-
-const StyledForgotPasswordPage = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    min-height: 100vh;
-    background-color: #f6f8fa;
-`;
+import { PublicLayout } from '../Common/components/PublicLayout/PublicLayout';
+import { AuthFormCard } from '../Common/components/PublicLayout/AuthFormCard';
 
 const LinkText = styled.p`
     margin: 10px 0;
@@ -26,15 +19,15 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
 
     if (isLoading) {
         return (
-            <StyledForgotPasswordPage>
+            <PublicLayout>
                 <Spinner />
-            </StyledForgotPasswordPage>
+            </PublicLayout>
         );
     }
 
     return (
-        <StyledForgotPasswordPage>
-            <Card elevation={Elevation.ONE}>
+        <PublicLayout>
+            <AuthFormCard elevation={Elevation.ONE}>
                 <h1>Forgot your password?</h1>
                 <h4>
                     Enter your email address, and if it exists you will receive
@@ -47,7 +40,7 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
                 <LinkText>
                     <a href={'/login'}>Return to login.</a>
                 </LinkText>
-            </Card>
-        </StyledForgotPasswordPage>
+            </AuthFormCard>
+        </PublicLayout>
     );
 };
