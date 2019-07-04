@@ -15,7 +15,10 @@ interface VoteControlsProps {
 
 // TODO add upvote / downvote fns based on vote target
 
-export const VoteControls = ({ voteCount, voteTarget }: VoteControlsProps) => (
+export const VoteControls = ({
+    voteCount = 0,
+    voteTarget,
+}: VoteControlsProps) => (
     <div>
         <Icon icon={'caret-up'} iconSize={30} />
         <VoteCount>{voteCount}</VoteCount>

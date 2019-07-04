@@ -1,6 +1,11 @@
 import AxiosService from '../Common/AxiosService';
 import { AxiosPromise } from 'axios';
-import { CreateAnswerDto, Answer, UpdateAnswerDto } from './answerTypes';
+import {
+    CreateAnswerDto,
+    Answer,
+    UpdateAnswerDto,
+    GetAnswersDto,
+} from './answerTypes';
 
 class AnswerService extends AxiosService {
     createAnswer(createAnswerDto: CreateAnswerDto): AxiosPromise<Answer> {
@@ -17,4 +22,16 @@ class AnswerService extends AxiosService {
             { data: updateAnswerDto },
         );
     }
+
+    getAnswers({
+        questionUuid,
+        expand,
+    }: GetAnswersDto): AxiosPromise<Answer[]> {
+        return this.get(
+            `/questions/${questionUuid}/answers?expand=${expand}`,
+            {},
+        );
+    }
 }
+
+export default new AnswerService();

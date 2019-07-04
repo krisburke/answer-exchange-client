@@ -5,8 +5,9 @@ import {
     Answer,
     CreateAnswerDto,
     AnswerActionTypes as actions,
+    GetAnswersDto,
 } from './answerTypes';
-import service from '../Question/QuestionService';
+import service from './AnswerService';
 
 export const createAnswerRequest = () => action(actions.CREATE_ANSWER_REQUEST);
 
@@ -27,5 +28,27 @@ export const createAnswer = (createAnswerDto: CreateAnswerDto) => (
         })
         .catch((error: AxiosError) =>
             dispatch(createAnswerFailure(error.message)),
+        );
+};
+
+export const getAnswersRequest = () => action(actions.GET_ANSWERS_REQUEST);
+
+export const getAnswersSuccess = (answers: Answer[]) =>
+    action(actions.GET_ANSWERS_SUCCESS, { items: answers, message: '' });
+
+export const getAnswersFailure = (message: string) =>
+    action(actions.GET_ANSWERS_FAILURE, { message });
+
+export const getAnswers = (getAnswersDto: GetAnswersDto) => (
+    dispatch: Dispatch,
+) => {
+    dispatch(getAnswersRequest());
+    return service
+        .getAnswers(getAnswersDto)
+        .then(({ data }: AxiosResponse<Answer[]>) => {
+            dispatch(getAnswersSuccess(data));
+        })
+        .catch((error: AxiosError) =>
+            dispatch(getAnswersFailure(error.message)),
         );
 };
