@@ -5,6 +5,7 @@ const initialState: AnswerState = {
     isError: false,
     isSuccess: false,
     statusMessage: '',
+    items: [],
 };
 
 interface Action {
@@ -19,6 +20,7 @@ export const answerReducer = (
     switch (action.type) {
         case actions.CREATE_ANSWER_REQUEST:
             return {
+                ...state,
                 isLoading: true,
                 isError: false,
                 isSuccess: false,
@@ -26,17 +28,44 @@ export const answerReducer = (
             };
         case actions.CREATE_ANSWER_SUCCESS:
             return {
+                ...state,
                 isLoading: false,
                 isError: false,
                 isSuccess: true,
                 statusMessage: '',
+                items: [...state.items, action.payload],
             };
         case actions.CREATE_ANSWER_FAILURE:
             return {
+                ...state,
                 isLoading: false,
                 isError: true,
                 isSuccess: false,
                 statusMessage: action.payload,
+            };
+        case actions.GET_ANSWERS_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                isError: false,
+                isSuccess: false,
+                statusMessage: '',
+            };
+        case actions.GET_ANSWERS_SUCCESS:
+            return {
+                isLoading: false,
+                isError: false,
+                isSuccess: true,
+                statusMessage: action.payload.message,
+                items: action.payload.items,
+            };
+        case actions.GET_ANSWERS_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                isSuccess: false,
+                statusMessage: action.payload.message,
             };
         default:
             return state;

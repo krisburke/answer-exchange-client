@@ -33,12 +33,6 @@ class QuestionService extends AxiosService {
     ): AxiosPromise<Question> {
         return this.post(`/questions`, { data: createQuestionDto });
     }
-
-    createAnswer(createAnswerDto: CreateAnswerDto): AxiosPromise<Answer> {
-        return this.post(`/questions/${createAnswerDto.questionUuid}/answers`, {
-            data: createAnswerDto,
-        });
-    }
 }
 
 export default new QuestionService();

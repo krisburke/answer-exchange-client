@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import 'react-quill/dist/quill.snow.css';
 import './Common/global.css';
 
 import { App } from './App/App';
