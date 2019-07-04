@@ -1,19 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
-import { Card, Elevation, Spinner } from '@blueprintjs/core';
+import { Elevation, Spinner } from '@blueprintjs/core';
 import { LoginPageProps } from './LoginPageContainer';
 import { LoginForm } from './LoginForm';
 import { StatusMessage } from '../Common/components/StatusMessage';
-
-const StyledLoginPage = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    min-height: 100vh;
-    background-color: #f6f8fa;
-`;
+import { PublicLayout } from '../Common/components/PublicLayout/PublicLayout';
+import { AuthFormCard } from '../Common/components/PublicLayout/AuthFormCard';
 
 const LinkText = styled.p`
     margin: 10px 0;
@@ -24,9 +17,9 @@ export const LoginPage = ({ auth, login }: LoginPageProps) => {
 
     if (isLoading) {
         return (
-            <StyledLoginPage>
+            <PublicLayout>
                 <Spinner />
-            </StyledLoginPage>
+            </PublicLayout>
         );
     }
 
@@ -35,8 +28,8 @@ export const LoginPage = ({ auth, login }: LoginPageProps) => {
     }
 
     return (
-        <StyledLoginPage>
-            <Card elevation={Elevation.ONE}>
+        <PublicLayout>
+            <AuthFormCard elevation={Elevation.ONE}>
                 <h1>Sign in to your account.</h1>
                 <h3>Enter your details below.</h3>
                 <LoginForm login={login} />
@@ -47,7 +40,7 @@ export const LoginPage = ({ auth, login }: LoginPageProps) => {
                 <LinkText>
                     Don't have an account? <a href={'/signup'}>Sign up.</a>
                 </LinkText>
-            </Card>
-        </StyledLoginPage>
+            </AuthFormCard>
+        </PublicLayout>
     );
 };

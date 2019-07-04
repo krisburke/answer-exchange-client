@@ -1,12 +1,12 @@
 import React from 'react';
-import { Navbar } from '../Common/components/Navbar/Navbar';
+import { AppNavbar } from '../Common/components/AppNavbar/AppNavbar';
 import { Props } from './MainContainer';
 
 export const MainLayout = (props: Props) => {
     console.log(props);
     return (
         <div>
-            <Navbar {...props} />
+            <AppNavbar {...props} />
             {props.children}
         </div>
     );

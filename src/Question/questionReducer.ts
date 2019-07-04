@@ -18,14 +18,14 @@ export const questionReducer = (
     action: Action,
 ): QuestionState => {
     switch (action.type) {
-        case 'GET_QUESTIONS_REQUEST':
+        case actions.GET_QUESTIONS_REQUEST:
             return {
                 ...state,
                 isLoading: true,
                 isError: false,
                 statusMessage: '',
             };
-        case 'GET_QUESTIONS_SUCCESS':
+        case actions.GET_QUESTIONS_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -33,21 +33,21 @@ export const questionReducer = (
                 isError: false,
                 statusMessage: '',
             };
-        case 'GET_QUESTIONS_FAILURE':
+        case actions.GET_QUESTIONS_FAILURE:
             return {
                 ...state,
                 isLoading: false,
                 isError: true,
                 statusMessage: action.payload,
             };
-        case 'GET_QUESTION_REQUEST':
+        case actions.GET_QUESTION_REQUEST:
             return {
                 ...state,
                 isLoading: true,
                 isError: false,
                 statusMessage: '',
             };
-        case 'GET_QUESTION_SUCCESS':
+        case actions.GET_QUESTION_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -55,7 +55,7 @@ export const questionReducer = (
                 isError: false,
                 statusMessage: '',
             };
-        case 'GET_QUESTION_FAILURE':
+        case actions.GET_QUESTION_FAILURE:
             return {
                 ...state,
                 isLoading: false,
