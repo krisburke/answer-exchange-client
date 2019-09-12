@@ -6,7 +6,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Question } from '../Question/questionTypes';
 import { QuestionRecentActivity } from './QuestionRecentActivity';
-import { AddComment } from '../Common/components/AddComment';
+import { AddCommentLink } from '../Common/components/AddComment/AddCommentLink';
 
 const QuestionHeader = styled.div`
     margin-bottom: 15px;
@@ -57,7 +57,7 @@ export const QuestionSection: React.FC<Props> = ({ question }) => {
                     <PostContent>{text}</PostContent>
                     <TagList tags={tags} />
                     <QuestionRecentActivity question={question} />
-                    <AddComment />
+                    <AddCommentLink />
                 </PostCell>
             </PostLayout>
         </>

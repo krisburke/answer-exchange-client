@@ -5,7 +5,7 @@ import { Answer } from '../../Answer/answerTypes';
 import { VoteControls } from '../../Vote/VoteControls';
 import { VoteTarget } from '../../Vote/voteTypes';
 import { AnswerRecentActivity } from './AnswerRecentActivity';
-import { AddComment } from '../../Common/components/AddComment';
+import { AddCommentLink } from '../../Common/components/AddComment/AddCommentLink';
 
 const AnswerLayout = styled.div`
     display: flex;
@@ -46,7 +46,7 @@ export const AnswerListItem: React.FC<Props> = ({ answer }) => {
                         <div dangerouslySetInnerHTML={{ __html: text }} />
                     </AnswerContent>
                     <AnswerRecentActivity answer={answer} />
-                    <AddComment />
+                    <AddCommentLink />
                 </AnswerCell>
             </AnswerLayout>
             <Divider />
