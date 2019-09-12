@@ -20,6 +20,7 @@ export class QuestionPage extends Component<QuestionPageProps> {
 
     render() {
         const { current, isLoading } = this.props.question;
+        console.log('question', this.props.question);
 
         if (isLoading || !current) {
             return <Spinner />;
