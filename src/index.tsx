@@ -8,7 +8,7 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import 'react-quill/dist/quill.snow.css';
 import './Common/global.css';
 
-import { App } from './App/App';
+import App from './App/App';
 import configureStore from './Common/redux/store';
 
 const history = createBrowserHistory();

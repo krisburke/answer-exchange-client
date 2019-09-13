@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import { Elevation, Spinner } from '@blueprintjs/core';
@@ -12,35 +12,33 @@ const LinkText = styled.p`
     margin: 10px 0;
 `;
 
-export default class SignupPage extends Component<SignupPageProps> {
-    render() {
-        const {
-            auth: { statusMessage, isError, isLoading, isSignedUp },
-        } = this.props;
+export default function SignupPage(props: SignupPageProps) {
+    const {
+        auth: { statusMessage, isError, isLoading, isSignedUp },
+    } = props;
 
-        if (isLoading) {
-            return (
-                <PublicLayout>
-                    <Spinner />
-                </PublicLayout>
-            );
-        }
-
-        if (isSignedUp) {
-            return <Redirect to="/login" />;
-        }
-
+    if (isLoading) {
         return (
             <PublicLayout>
-                <AuthFormCard elevation={Elevation.ONE}>
-                    <h1>Sign up for an account.</h1>
-                    <SignupForm {...this.props} />
-                    <StatusMessage isError={isError} message={statusMessage} />
-                    <LinkText>
-                        Already have an account? <a href={'/login'}>Sign in.</a>
-                    </LinkText>
-                </AuthFormCard>
+                <Spinner />
             </PublicLayout>
         );
     }
+
+    if (isSignedUp) {
+        return <Redirect to="/login" />;
+    }
+
+    return (
+        <PublicLayout>
+            <AuthFormCard elevation={Elevation.ONE}>
+                <h1>Sign up for an account.</h1>
+                <SignupForm {...props} />
+                <StatusMessage isError={isError} message={statusMessage} />
+                <LinkText>
+                    Already have an account? <a href={'/login'}>Sign in.</a>
+                </LinkText>
+            </AuthFormCard>
+        </PublicLayout>
+    );
 }
