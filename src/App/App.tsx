@@ -11,7 +11,7 @@ interface Props {
     history: History;
 }
 
-export const App: React.FC<Props> = ({ store, history }) => {
+export default function App({ store, history }: Props) {
     return (
         <Provider store={store}>
             <ConnectedRouter history={history}>
@@ -19,4 +19,4 @@ export const App: React.FC<Props> = ({ store, history }) => {
             </ConnectedRouter>
         </Provider>
     );
-};
+}

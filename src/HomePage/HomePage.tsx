@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Spinner, AnchorButton, Intent } from '@blueprintjs/core';
 import styled from 'styled-components';
 import { HomePageProps } from './HomePageContainer';
@@ -22,41 +22,37 @@ const QuestionHeaderBtn = styled.div`
     margin: 0;
 `;
 
-export class HomePage extends Component<HomePageProps> {
-    TAKE = 1000; // todo, impl pagination
-    SKIP = 0;
-    EXPAND = 'answers,author,tags';
+export function HomePage(props: HomePageProps) {
+    const TAKE = 1000; // todo, impl pagination
+    const SKIP = 0;
+    const EXPAND = 'answers,author,tags';
+    const {
+        question: { isLoading, items },
+    } = props;
 
-    componentDidMount() {
-        this.props.getQuestions({
-            expand: this.EXPAND,
-            skip: this.SKIP,
-            take: this.TAKE,
+    useEffect(() => {
+        props.getQuestions({
+            expand: EXPAND,
+            skip: SKIP,
+            take: TAKE,
         });
+    }, []);
+
+    if (isLoading || !items) {
+        return <Spinner />;
     }
 
-    render() {
-        const {
-            question: { isLoading, items },
-        } = this.props;
-        console.log('questions:', items);
-
-        if (isLoading || !items) {
-            return <Spinner />;
-        }
-
-        return (
-            <MainContainer>
-                <QuestionHeader>
-                    <QuestionHeaderText>Top Questions</QuestionHeaderText>
-                    <QuestionHeaderBtn>
-                        <AnchorButton href="/ask" intent={Intent.PRIMARY}>
-                            Ask Question
-                        </AnchorButton>
-                    </QuestionHeaderBtn>
-                </QuestionHeader>
-                <QuestionList questions={items} />
-            </MainContainer>
-        );
-    }
+    return (
+        <MainContainer>
+            <QuestionHeader>
+                <QuestionHeaderText>Top Questions</QuestionHeaderText>
+                <QuestionHeaderBtn>
+                    <AnchorButton href="/ask" intent={Intent.PRIMARY}>
+                        Ask Question
+                    </AnchorButton>
+                </QuestionHeaderBtn>
+            </QuestionHeader>
+            <QuestionList questions={items} />
+        </MainContainer>
+    );
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FormGroup, InputGroup, Intent } from '@blueprintjs/core';
 import { FormFieldError } from './FormFieldError';
 
@@ -17,46 +17,34 @@ interface Props {
     disabled?: boolean;
 }
 
-class TextInputField extends Component<Props> {
-    constructor(props: Props) {
-        super(props);
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
-    }
-
-    handleChange = (event: any) => {
+function TextInputField(props: Props) {
+    const handleChange = (event: any) => {
         const { value } = event.target;
-        this.props.onChange(this.props.id, value);
+        props.onChange(props.id, value);
     };
 
-    handleBlur = () => {
-        this.props.onBlur(this.props.id, true);
+    const handleBlur = () => {
+        props.onBlur(props.id, true);
     };
 
-    render() {
-        const shouldShowError: boolean =
-            !!this.props.error && this.props.touched;
-        const intent = shouldShowError ? Intent.DANGER : Intent.NONE;
+    const shouldShowError: boolean = !!props.error && props.touched;
+    const intent = shouldShowError ? Intent.DANGER : Intent.NONE;
 
-        return (
-            <FormGroup label={this.props.label} labelFor={this.props.id}>
-                <InputGroup
-                    id={this.props.id}
-                    type={this.props.type}
-                    onChange={this.handleChange}
-                    onBlur={this.handleBlur}
-                    value={this.props.value}
-                    intent={intent}
-                    autoFocus={this.props.autofocus}
-                    disabled={this.props.disabled}
-                />
-                {shouldShowError && (
-                    <FormFieldError>{this.props.error}</FormFieldError>
-                )}
-            </FormGroup>
-        );
-    }
+    return (
+        <FormGroup label={props.label} labelFor={props.id}>
+            <InputGroup
+                id={props.id}
+                type={props.type}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={props.value}
+                intent={intent}
+                autoFocus={props.autofocus}
+                disabled={props.disabled}
+            />
+            {shouldShowError && <FormFieldError>{props.error}</FormFieldError>}
+        </FormGroup>
+    );
 }
 
 export default TextInputField;
