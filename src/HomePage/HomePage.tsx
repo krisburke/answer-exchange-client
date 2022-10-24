@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Spinner, AnchorButton, Intent } from '@blueprintjs/core';
+import { AnchorButton, Intent } from '@blueprintjs/core';
 import styled from 'styled-components';
 import { HomePageProps } from './HomePageContainer';
 import { QuestionList } from './QuestionList';
@@ -22,25 +22,18 @@ const QuestionHeaderBtn = styled.div`
     margin: 0;
 `;
 
-export function HomePage(props: HomePageProps) {
+export function HomePage({ question, getQuestions }: HomePageProps) {
     const TAKE = 1000; // todo, impl pagination
     const SKIP = 0;
     const EXPAND = 'answers,author,tags';
-    const {
-        question: { isLoading, items },
-    } = props;
 
     useEffect(() => {
-        props.getQuestions({
+        getQuestions({
             expand: EXPAND,
             skip: SKIP,
             take: TAKE,
         });
     }, []);
-
-    if (isLoading || !items) {
-        return <Spinner />;
-    }
 
     return (
         <MainContainer>
@@ -52,7 +45,7 @@ export function HomePage(props: HomePageProps) {
                     </AnchorButton>
                 </QuestionHeaderBtn>
             </QuestionHeader>
-            <QuestionList questions={items} />
+            <QuestionList question={question} />
         </MainContainer>
     );
 }
